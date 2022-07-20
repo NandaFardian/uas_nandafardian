@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AlatberatController;
+use App\Http\Controllers\MerkController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Merk;
 class MerkController extends Controller
 {
     /**
@@ -19,7 +19,9 @@ class MerkController extends Controller
 
     public function index()
     {
-        //
+        $nomor = 1;
+        $merk = Merk::all();
+        return view('page.merk.index',compact('merk','nomor'));
     }
 
     /**
@@ -29,7 +31,7 @@ class MerkController extends Controller
      */
     public function create()
     {
-        //
+        return view('page.merk.form');
     }
 
     /**
@@ -40,7 +42,12 @@ class MerkController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $merk = new Merk;
+        $merk->kode = $request->kode;
+        $merk->merk = $request->nama;
+        $merk->kapasitas = $request->kap;
+        $merk->save();
+        return redirect('/merk');
     }
 
     /**
@@ -62,7 +69,8 @@ class MerkController extends Controller
      */
     public function edit($id)
     {
-        //
+        $merk = Merk::find($id);
+        return view('page.merk.edit',compact('merk'));
     }
 
     /**
@@ -74,7 +82,13 @@ class MerkController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $merk = Merk::find($id);
+
+        $merk->kode = $request->kode;
+        $merk->merk = $request->nama;
+        $merk->kapasitas = $request->kap;
+        $merk->save();
+        return redirect('/merk');
     }
 
     /**
@@ -85,6 +99,8 @@ class MerkController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $merk = Merk::find($id);
+        $merk->delete();
+        return redirect('/merk');
     }
 }

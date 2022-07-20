@@ -63,7 +63,7 @@
           </li>
           <li class="nav-header">Data Master</li>
           <li class="nav-item">
-            <a href="/" class="nav-link">
+            <a href="/alatberat" class="nav-link">
               <i class="nav-icon far fa-calendar-alt"></i>
               <p>
                 Data Alat Berat
@@ -71,7 +71,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/" class="nav-link">
+            <a href="/merk" class="nav-link">
               <i class="nav-icon far fa-image"></i>
               <p>
                 Data Merk

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Alatberat;
 class AlatberatController extends Controller
 {
     /**
@@ -19,7 +19,9 @@ class AlatberatController extends Controller
     
     public function index()
     {
-        //
+        $nomor = 1;
+        $alatberat = Alatberat::all();
+        return view('page.alatberat.index',compact('alatberat','nomor'));
     }
 
     /**
