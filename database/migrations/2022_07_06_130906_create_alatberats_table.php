@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('tahun');
             $table->string('jumlah');
             $table->string('harga');
+            $table->string('foto')->default('default.png');
             $table->timestamps();
         });
     }

@@ -46,8 +46,6 @@
                           <th>Jenis Alat Berat</th>
                           <th>Merk</th>
                           <th>Tahun</th>
-                          <th>Jumlah</th>
-                          <th>Harga</th>
                           <th>Action</th>
                         </tr>
                       <tbody>
@@ -57,9 +55,35 @@
                                   <td>{{ $item->nm_alat }}</td>
                                   <td>{{ $item->merks->merk }}</td>
                                   <td>{{ $item->tahun }}</td>
-                                  <td>{{ $item->jumlah }}</td>
-                                  <td>{{ $item->harga }}</td>
                                   <td>
+                                      <button type="button" class="btn btn-success"   data-bs-toggle="modal" data-bs-target="#exampleModal1{{$item->id}}">
+                                        Detail
+                                      </button>
+                                      <!-- Modal -->
+                                      <div class="modal fade" id="exampleModal1{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="exampleModalLabel">Detail</h5>
+                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                              <img src="berkas/{{$item->foto}}" height="350" alt="">
+                            
+                                            </div>
+                                            <div class="modal-body text-center">
+                                              <h5>Jenis Alat Berat : <b>{{$item->nm_alat}}</b></h5>
+                                              <h5>Merk : <b>{{$item->merks->merk}}</b></h5>
+                                              <h5>Tahun : <b>{{$item->tahun}}</b></h5>
+                                              <h5>Jumlah : <b>{{$item->jumlah}}</b></h5>
+                                              <h5>Harga : <b>{{$item->harga}}</b></h5>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
                                       <a href="/alatberat/edit/{{$item->id}}" class="btn btn-warning">Edit</a>
                                       <button type="button" data-bs-toggle="modal" class="btn btn-danger" data-bs-target="#exampleModal{{$item->id}}">Hapus
                                       </button>

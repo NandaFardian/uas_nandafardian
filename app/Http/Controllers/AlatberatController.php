@@ -52,6 +52,14 @@ class AlatberatController extends Controller
      */
     public function store(Request $request)
     {
+        $validasi = $request->validate(
+            [
+                'foto' => 'required|file|mimes:png,jpg,jpeg',
+            ]
+            );
+        $nama_file = $request->foto->getClientOriginalName();
+ 
+        $upload3 = $request->foto->move('berkas',$nama_file);
         $alatberat = new Alatberat;
             
         $alatberat->nm_alat = $request->nama;
@@ -59,6 +67,7 @@ class AlatberatController extends Controller
         $alatberat->tahun = $request->tahun;
         $alatberat->jumlah = $request->jumlah;
         $alatberat->harga = $request->harga;
+        $alatberat->foto = $request->foto->getClientOriginalName();
         $alatberat->save();
         return redirect('/alatberat');
     }
