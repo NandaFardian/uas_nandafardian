@@ -17,11 +17,19 @@ class MerkController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        if($request){
+            $merk = Merk::where('kode','LIKE','%'.$request->search.'%')
+                        ->orWhere('merk','LIKE','%'.$request->search.'%')
+                        ->orWhere('kapasitas','LIKE','%'.$request->search.'%')
+            ->get();
+        }else{
+            $merk = Merk::all();
+        }
+
         $nomor = 1;
-        $merk = Merk::all();
-        return view('page.merk.index',compact('merk','nomor'));
+        return view('page.merk.index',compact('merk','nomor','request'));
     }
 
     /**
