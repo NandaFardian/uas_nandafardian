@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Merk extends Model
 {
-    use HasFactory;
+    // use HasFactory;
+    public function alatberats(){
+        return $this->belongTo(Alatberat::class);
+    }
 }

@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('alatberats', function (Blueprint $table) {
             $table->id();
-            $table->string('kode')->unique();
             $table->string('nm_alat');
             $table->bigInteger('merks_id');
             $table->string('tahun');

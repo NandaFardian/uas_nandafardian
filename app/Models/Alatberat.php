@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Alatberat extends Model
 {
-    use HasFactory;
+    // use HasFactory;
+    public function merks(){
+        return $this->hasOne(Merk::class,'id','merks_id');
+    }
 }

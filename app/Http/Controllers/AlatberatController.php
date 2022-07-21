@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Alatberat;
+use App\Models\Merk;
+
 class AlatberatController extends Controller
 {
     /**
@@ -17,11 +19,18 @@ class AlatberatController extends Controller
         $this->middleware('auth');
     }
     
-    public function index()
+    public function index(Request $request )
     {
+        if($request){
+            $alatberat = Alatberat::where('nm_alat','LIKE','%'.$request->search.'%')
+                                    ->orWhere('tahun','LIKE','%'.$request->search.'%')
+            ->get();
+        }else{
+            $alatberat = Alatberat::all();
+        }
+
         $nomor = 1;
-        $alatberat = Alatberat::all();
-        return view('page.alatberat.index',compact('alatberat','nomor'));
+        return view('page.alatberat.index',compact('alatberat','nomor','request'));
     }
 
     /**
@@ -31,7 +40,8 @@ class AlatberatController extends Controller
      */
     public function create()
     {
-        //
+        $merk = Merk::all();
+        return view('page.alatberat.form',compact('merk'));
     }
 
     /**
@@ -42,7 +52,15 @@ class AlatberatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $alatberat = new Alatberat;
+            
+        $alatberat->nm_alat = $request->nama;
+        $alatberat->merks_id = $request->merk;
+        $alatberat->tahun = $request->tahun;
+        $alatberat->jumlah = $request->jumlah;
+        $alatberat->harga = $request->harga;
+        $alatberat->save();
+        return redirect('/alatberat');
     }
 
     /**
@@ -64,7 +82,9 @@ class AlatberatController extends Controller
      */
     public function edit($id)
     {
-        //
+        $alatberat = Alatberat::find($id);
+        $merk = Merk::all();
+        return view('page.alatberat.edit',compact('alatberat','merk'));
     }
 
     /**
@@ -76,7 +96,15 @@ class AlatberatController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $alatberat = Alatberat::find($id);
+        
+        $alatberat->nm_alat = $request->nama;
+        $alatberat->merks_id = $request->merk;
+        $alatberat->tahun = $request->tahun;
+        $alatberat->jumlah = $request->jumlah;
+        $alatberat->harga = $request->harga;
+        $alatberat->save();
+        return redirect('/alatberat');
     }
 
     /**
@@ -87,6 +115,8 @@ class AlatberatController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $alatberat = Alatberat::find($id);
+        $alatberat->delete();
+        return redirect('/alatberat');
     }
 }
