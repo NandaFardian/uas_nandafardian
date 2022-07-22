@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use App\Models\Alatberat;
 use App\Models\Merk;
 
@@ -106,12 +107,21 @@ class AlatberatController extends Controller
     public function update(Request $request, $id)
     {
         $alatberat = Alatberat::find($id);
-        
         $alatberat->nm_alat = $request->nama;
         $alatberat->merks_id = $request->merk;
         $alatberat->tahun = $request->tahun;
         $alatberat->jumlah = $request->jumlah;
         $alatberat->harga = $request->harga;
+        $alatberat->foto = $request->foto->getClientOriginalName();
+    
+        $validasi = $request->validate(
+            [
+                'foto' => 'required|file|mimes:png,jpg,jpeg',
+            ]
+            );
+        $nama_file = $request->foto->getClientOriginalName();
+        $upload3 = $request->foto->move('berkas',$nama_file);
+        
         $alatberat->save();
         return redirect('/alatberat');
     }

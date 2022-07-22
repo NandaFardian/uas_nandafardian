@@ -29,7 +29,7 @@
           <div class="card card-primary">
             <!-- /.card-header -->
             <!-- form start -->
-            <form id="quickForm" method="post" action="/alatberat/{{$alatberat->id}}">
+            <form id="quickForm" method="post" action="/alatberat/{{$alatberat->id}}" enctype="multipart/form-data">
               @csrf
               @method('PUT')
               <div class="card-body">
@@ -57,6 +57,10 @@
                 <div class="mb-3">
                   <label for="exampleInputPassword1" class="form-label">Harga</label>
                   <input type="text" value="{{$alatberat->harga}}" name="harga" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div class="mb-3">
+                  <input type="file" name="foto" class="form-control" id="exampleInputPassword1">
+                  <img src="{{asset('berkas/'.$alatberat->foto)}}" height="350" alt="">
                 </div>
               </div>
               <!-- /.card-body -->
